@@ -6,8 +6,7 @@ import java.util.TreeMap;
 public class SimpleSearch extends Search {
 
 	/*
-	 * A very simple way of searching text, we will simply be looking at each exact character match that we can make and then saving that
-	 * TODO: this could have issues with matches though, say it's arachnid trying to match on ararachnid, we'll miss this match so I will to correct that.
+	 * A very simple way of searching text, we will simply be looking at each exact character match that we can make and then saving that, the complexity of this is O(M*N)
 	 */
 	@Override
 	public Map < String, Integer > getRankedSearchResults( String searchTerm, Map <String, String> documentContentsMap) throws Exception {
@@ -17,9 +16,9 @@ public class SimpleSearch extends Search {
 			int numberOfMatches = 0;
 			for(int documentStringIndex = 0; documentStringIndex < documentString.length(); documentStringIndex++){
 				int searchTermIndex = 0;
-				while(documentStringIndex < documentString.length() && searchTerm.charAt( searchTermIndex ) == documentString.charAt( documentStringIndex )){
+				/* Instead of incrementing documentStringIndex we will just be adding searchTermIndex to it to prevent issues like not being able to match on ararachnid to arachnid.  */
+				while(documentStringIndex + searchTermIndex < documentString.length() && searchTerm.charAt( searchTermIndex ) == documentString.charAt( documentStringIndex + searchTermIndex )){
 					searchTermIndex++;
-					documentStringIndex++;
 
 					if(searchTermIndex == searchTerm.length()){
 						numberOfMatches++;
