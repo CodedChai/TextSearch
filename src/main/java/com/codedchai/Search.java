@@ -28,8 +28,6 @@ public abstract class Search {
 			throw new IOException( "Failed to get path " + getDocumentDirectory() );
 		}
 
-		documentContentsMap.keySet().stream().forEach( key -> System.out.println( key + " : " + documentContentsMap.get( key ) ) );
-
 		return documentContentsMap;
 	}
 
@@ -38,7 +36,7 @@ public abstract class Search {
 
 		try ( Stream < String > stream = Files.lines( pathToFile, StandardCharsets.UTF_8 ) ) {
 			stream.forEach( line -> fileContents.append( line ) );
-		} catch ( IOException e ) {
+		} catch ( Exception e ) {
 			e.printStackTrace();
 		}
 
