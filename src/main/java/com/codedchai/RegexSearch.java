@@ -26,16 +26,6 @@ public class RegexSearch extends Search {
 			rankedResults.put( documentKey, numberOfMatches );
 		}
 
-		for ( String key : rankedResults.keySet() ) {
-			System.out.println( key + " : " + rankedResults.get( key ) );
-		}
-
 		return rankedResults;
-	}
-
-	public static void main( String[] args ) throws Exception {
-		Search search = new RegexSearch();
-
-		search.getRankedSearchResults( "of", search.loadDocuments() );
 	}
 }

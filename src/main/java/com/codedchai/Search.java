@@ -16,6 +16,10 @@ public abstract class Search {
 	 */
 	public abstract Map < String, Integer > getRankedSearchResults( String searchTerm, Map < String, String > documentContentsMap ) throws Exception;
 
+	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
+		return getRankedSearchResults( searchTerm, loadDocuments() );
+	}
+
 	/*
 	 * Load in all searchable files and store them in a Map
 	 */

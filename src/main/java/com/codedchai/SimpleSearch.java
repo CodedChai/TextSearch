@@ -30,16 +30,6 @@ public class SimpleSearch extends Search {
 			rankedResults.put( documentKey, numberOfMatches );
 		}
 
-		for ( String key : rankedResults.keySet() ) {
-			System.out.println( key + " : " + rankedResults.get( key ) );
-		}
-
 		return rankedResults;
-	}
-
-	public static void main( String[] args ) throws Exception {
-		Search search = new SimpleSearch();
-
-		search.getRankedSearchResults( "of", search.loadDocuments() );
 	}
 }
