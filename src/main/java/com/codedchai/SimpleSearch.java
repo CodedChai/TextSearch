@@ -9,7 +9,7 @@ public class SimpleSearch extends Search {
 	 * A very simple way of searching text, we will simply be looking at each exact character match that we can make and then saving that, the complexity of this is O(M*N)
 	 */
 	@Override
-	public Map < String, Integer > getRankedSearchResults( String searchTerm, Map < String, String > documentContentsMap ) throws Exception {
+	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
 		Map < String, Integer > rankedResults = new HashMap <>();
 		for ( String documentKey : documentContentsMap.keySet() ) {
 			String documentString = documentContentsMap.get( documentKey );

@@ -1,7 +1,5 @@
 package com.codedchai;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -25,27 +23,28 @@ public class Application {
 
 			System.out.println( "Search Method: 1) String Match 2) Regular Expression 3) Indexed" );
 
-			int methodID = scanner.nextInt();
+			int searchID = scanner.nextInt();
 
-			Search search = initializeSearch( methodID );
+			Search search = instantiateSearch( searchID );
+			search.initialize();
 
 			System.out.println( "Searching for '" + searchTerm + "' using class " + search.getClass().getSimpleName() );
 
-			Instant startTime = Instant.now();
+			Long startTime = System.nanoTime();
 			Map < String, Integer > rankedResults = search.getRankedSearchResults( searchTerm );
-			Instant endTIme = Instant.now();
+			Long endTime = System.nanoTime();
 
 			outputRankedResultsInOrder( rankedResults );
 
-			System.out.println( "\nElapsed time: " + Duration.between( startTime, endTIme ).toMillis() + " ms" );
+			Double elapsedTimeInMillis = (double) (endTime - startTime) / 1000000;
+			System.out.println( "\nElapsed time: " + elapsedTimeInMillis + " ms" );
 
 		} catch ( Exception e ) {
 			e.printStackTrace();
 		}
-
 	}
 
-	protected Search initializeSearch( int searchID ) {
+	protected Search instantiateSearch( int searchID ) {
 		Map < Integer, Supplier < Search > > searchFactories = new HashMap <>();
 
 		searchFactories.put( 1, SimpleSearch::new );

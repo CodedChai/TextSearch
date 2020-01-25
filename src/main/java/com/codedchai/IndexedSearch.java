@@ -4,20 +4,25 @@ import java.util.*;
 
 public class IndexedSearch extends Search {
 
-	protected Map < String, Map < String, Set < Integer > > > documentWordIndexMap = null;
+	protected Map < String, Map < String, Set < Integer > > > documentWordIndexMap;
 
 	protected static final String SPLIT_WHITESPACE = "\\s+";
 	List < String > suffixes = Arrays.asList( "ed", "ing", "ly", "s" );
 	protected Set < String > stopwords = initializeStopwords();
 
 	@Override
-	public Map < String, Integer > getRankedSearchResults( String searchTerm, Map < String, String > documentContentsMap ) throws Exception {
+	public void initialize() throws Exception {
+		super.initialize();
+		documentWordIndexMap = generateDocumentWordIndexMap();
+	}
+
+	@Override
+	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
 		Map < String, Integer > rankedResults = new HashMap <>();
 
-		Map < String, Map < String, Set < Integer > > > localDocumentMap = getDocumentWordIndexMap();
 		List < String > searchList = Arrays.asList( preProcess( searchTerm ).split( SPLIT_WHITESPACE ) );
-		for ( String documentKey : localDocumentMap.keySet() ) {
-			Map < String, Set < Integer > > wordIndexMap = localDocumentMap.get( documentKey );
+		for ( String documentKey : documentWordIndexMap.keySet() ) {
+			Map < String, Set < Integer > > wordIndexMap = documentWordIndexMap.get( documentKey );
 
 			if ( searchList.isEmpty() ) {
 				continue;
@@ -45,7 +50,7 @@ public class IndexedSearch extends Search {
 		return rankedResults;
 	}
 
-	public Map < String, Map < String, Set < Integer > > > getDocumentWordIndexMap() throws Exception {
+	public Map < String, Map < String, Set < Integer > > > generateDocumentWordIndexMap() throws Exception {
 		if ( documentWordIndexMap == null ) {
 			documentWordIndexMap = new HashMap <>();
 

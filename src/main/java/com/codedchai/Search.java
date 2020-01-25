@@ -10,14 +10,16 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public abstract class Search {
+	Map < String, String > documentContentsMap;
 
 	/*
 	 * We will want to return an ordered list of our top results that we searched.
 	 */
-	public abstract Map < String, Integer > getRankedSearchResults( String searchTerm, Map < String, String > documentContentsMap ) throws Exception;
+	public abstract Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception;
 
-	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
-		return getRankedSearchResults( searchTerm, loadDocuments() );
+
+	public void initialize() throws Exception {
+		documentContentsMap = loadDocuments();
 	}
 
 	/*

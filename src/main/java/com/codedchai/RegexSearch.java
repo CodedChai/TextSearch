@@ -9,7 +9,7 @@ public class RegexSearch extends Search {
 
 	// https://stackoverflow.com/questions/7378451/java-regex-match-count
 	@Override
-	public Map < String, Integer > getRankedSearchResults( String searchTerm, Map < String, String > documentContentsMap ) throws Exception {
+	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
 		Map < String, Integer > rankedResults = new HashMap <>();
 
 		Pattern pattern = Pattern.compile( searchTerm );
