@@ -11,8 +11,7 @@ public class RegexSearch extends Search {
 	@Override
 	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
 		Map < String, Integer > rankedResults = new HashMap <>();
-
-		Pattern pattern = Pattern.compile( searchTerm );
+		Pattern pattern = Pattern.compile( Pattern.quote( searchTerm ) );
 
 		for ( String documentKey : documentContentsMap.keySet() ) {
 			Matcher matcher = pattern.matcher( documentContentsMap.get( documentKey ) );

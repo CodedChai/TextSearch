@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public abstract class Search {
-	Map < String, String > documentContentsMap;
+	protected Map < String, String > documentContentsMap;
 
 	/*
 	 * We will want to return an ordered list of our top results that we searched.
@@ -51,6 +51,10 @@ public abstract class Search {
 
 	public String getDocumentDirectory() {
 		return "resources";
+	}
+
+	public Map<String, String> getDocumentContentsMap(){
+		return documentContentsMap;
 	}
 
 }
