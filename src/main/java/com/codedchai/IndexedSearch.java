@@ -31,7 +31,7 @@ public class IndexedSearch extends Search {
 			Set < Integer > currentIndices = wordIndexMap.get( searchList.get( 0 ) );
 			if ( searchList.size() > 1 && currentIndices != null && !currentIndices.isEmpty() ) {
 				for ( int i = 1; i < searchList.size(); i++ ) {
-					String searchWord = preProcess( searchList.get( i ) );
+					String searchWord = searchList.get( i );
 					Set < Integer > nextIndices = wordIndexMap.get( searchWord );
 					Set < Integer > tempValidIndices = new HashSet <>();
 
