@@ -8,7 +8,6 @@ import static java.util.stream.Collectors.toMap;
 
 public class Application {
 
-
 	public static void main( String[] args ) {
 		Application application = new Application();
 
