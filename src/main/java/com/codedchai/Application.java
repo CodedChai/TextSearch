@@ -9,12 +9,19 @@ import static java.util.stream.Collectors.toMap;
 public class Application {
 
 	public static void main( String[] args ) {
-		Application application = new Application();
+		try{
+			Application application = new Application();
 
-		application.run();
+			application.run();
+		} catch ( Exception e ){
+			e.printStackTrace();
+
+			// Report exception in logging location
+		}
+
 	}
 
-	protected void run() {
+	protected void run() throws Exception {
 
 		try ( Scanner scanner = new Scanner( System.in ) ) {
 			System.out.print( "Enter search term: " );
@@ -38,17 +45,21 @@ public class Application {
 			Double elapsedTimeInMillis = (double) (endTime - startTime) / 1000000;
 			System.out.println( "\nElapsed time: " + elapsedTimeInMillis + " ms" );
 
-		} catch ( Exception e ) {
-			e.printStackTrace();
 		}
 	}
 
-	protected Search instantiateSearch( int searchID ) {
+	protected Map<Integer, Supplier<Search>> getSearchFactories(){
 		Map < Integer, Supplier < Search > > searchFactories = new HashMap <>();
 
 		searchFactories.put( 1, SimpleSearch::new );
 		searchFactories.put( 2, RegexSearch::new );
 		searchFactories.put( 3, IndexedSearch::new );
+
+		return searchFactories;
+	}
+
+	protected Search instantiateSearch( int searchID ) {
+		Map < Integer, Supplier < Search > > searchFactories = getSearchFactories();
 
 		Supplier < Search > defaultSearchSupplier = () -> new SimpleSearch();
 		Function < Integer, Search > function = key -> searchFactories.getOrDefault( key, defaultSearchSupplier ).get();
