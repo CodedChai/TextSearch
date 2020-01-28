@@ -58,7 +58,7 @@ class IndexedSearchTest {
 	void stem() {
 		IndexedSearch indexedSearch = new IndexedSearch();
 		String connect = "connect";
-		List < String > listToStem = Arrays.asList( "connected", "connects", "connectly", "connecting", "connect" );
+		List < String > listToStem = Arrays.asList( "connected", "connects", "connectly", "connecting", "connecter", "connect" );
 
 		assert (listToStem.stream().allMatch( stemmableWord -> connect.equals( indexedSearch.stem( stemmableWord ).stripTrailing() ) ));
 	}

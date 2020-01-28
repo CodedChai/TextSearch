@@ -7,7 +7,7 @@ public class IndexedSearch extends Search {
 	protected Map < String, Map < String, Set < Integer > > > documentWordIndexMap;
 
 	protected static final String SPLIT_WHITESPACE = "\\s+";
-	List < String > suffixes = Arrays.asList( "ed", "ing", "ly", "s" );
+	List < String > suffixes = Arrays.asList( "ed", "ing", "ly", "s", "er" );
 	protected Set < String > stopwords = initializeStopwords();
 
 	@Override
@@ -120,7 +120,6 @@ public class IndexedSearch extends Search {
 				textWithoutStopwords.append( " " );
 			}
 		}
-
 
 		return textWithoutStopwords.toString().isEmpty() ? text : textWithoutStopwords.toString();
 	}
