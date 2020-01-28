@@ -38,6 +38,8 @@ Searching for a phrase is pretty simple with this implementation. I create a set
 
 To test the performance of each algorithm I ran them for 2 million iterations each. To come up with search terms I took all of the text from the documents and cycled through them using 1-10 words at a time. While doing performance testing I found that I was accidentally preprocessing every word a second time during my indexed search. Once I removed that logic it significantly improved the performance of this search dropping it from an 11 second runtime to 7 second runtime on 2 million searches. 
 
+All of my testing was done on an i7-6700k with a core clock at 4.4 GHz and a cache clock of 4.3 GHz as well as 48 GB DDR4-3200 CL16 memory. Your results will vary depending on hardware.
+
 ## Testing the Algorithms 
 
 I used a mixture of unit testing and running specific search words through each algorithm to ensure they worked as expected. I ensured that the results were the same between the three algorithms as well. Through my performance testing I also found that there could be issues with the regex search depending on what characters were used so I had to use Pattern.quote(). 
