@@ -2,8 +2,6 @@ package com.codedchai;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class RegexSearchTest {
 
 	/*
@@ -16,6 +14,6 @@ class RegexSearchTest {
 
 		search.initialize();
 
-		assert(!search.getRankedSearchResults( "(" ).isEmpty());
+		assert (!search.getRankedSearchResults( "(" ).isEmpty());
 	}
 }

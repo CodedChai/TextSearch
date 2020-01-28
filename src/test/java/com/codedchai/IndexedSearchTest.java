@@ -1,6 +1,7 @@
 package com.codedchai;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,28 +19,28 @@ class IndexedSearchTest {
 		indexedSearch.initialize();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	void getRankedSearchResults() throws Exception {
 		assert (!indexedSearch.getRankedSearchResults( "fast" ).isEmpty());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	void generateDocumentWordIndexMap() throws Exception {
-		assert (!indexedSearch.generateDocumentWordIndexMap().isEmpty());
+		assert (!indexedSearch.getDocumentWordIndexMap().isEmpty());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	void lowerCase() {
 		IndexedSearch indexedSearch = new IndexedSearch();
 		assertEquals( "lowercase", indexedSearch.lowerCase( "LOWERCASE" ) );
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	void stripSpecialCharacters() {
 		assertEquals( indexedSearch.stripSpecialCharacters( "-()" ), "   " );
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	void stopwordRemoval() {
 		IndexedSearch indexedSearch = new IndexedSearch();
 		Set < String > stopwords = indexedSearch.initializeStopwords();
@@ -54,7 +55,7 @@ class IndexedSearchTest {
 		assert (removedAllStopwords);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	void stem() {
 		IndexedSearch indexedSearch = new IndexedSearch();
 		String connect = "connect";

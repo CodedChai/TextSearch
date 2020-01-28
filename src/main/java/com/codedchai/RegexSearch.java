@@ -7,7 +7,11 @@ import java.util.regex.Pattern;
 
 public class RegexSearch extends Search {
 
-	// https://stackoverflow.com/questions/7378451/java-regex-match-count
+	/*
+	 * https://stackoverflow.com/questions/7378451/java-regex-match-count for reference on why I am using a matchIndex.
+	 *
+	 * Take the search term, turn it into a regex while escaping special characters and return the results.
+	 */
 	@Override
 	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
 		Map < String, Integer > rankedResults = new HashMap <>();

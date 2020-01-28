@@ -10,19 +10,25 @@ public class IndexedSearch extends Search {
 	List < String > suffixes = Arrays.asList( "ed", "ing", "ly", "s", "er" );
 	protected Set < String > stopwords = initializeStopwords();
 
+	/*
+	 * We will need to create our index after loading in our text and preprocess the text
+	 */
 	@Override
 	public void initialize() throws Exception {
 		super.initialize();
-		documentWordIndexMap = generateDocumentWordIndexMap();
+		getDocumentWordIndexMap();
 	}
 
+	/*
+	 * We will search the index word by word making sure that the nth word's index is next to the nth + 1 word's index
+	 */
 	@Override
 	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
 		Map < String, Integer > rankedResults = new HashMap <>();
 
 		List < String > searchList = Arrays.asList( preProcess( searchTerm ).split( SPLIT_WHITESPACE ) );
-		for ( String documentKey : documentWordIndexMap.keySet() ) {
-			Map < String, Set < Integer > > wordIndexMap = documentWordIndexMap.get( documentKey );
+		for ( String documentKey : getDocumentWordIndexMap().keySet() ) {
+			Map < String, Set < Integer > > wordIndexMap = getDocumentWordIndexMap().get( documentKey );
 
 			if ( searchList.isEmpty() ) {
 				continue;
@@ -50,7 +56,13 @@ public class IndexedSearch extends Search {
 		return rankedResults;
 	}
 
-	public Map < String, Map < String, Set < Integer > > > generateDocumentWordIndexMap() throws Exception {
+	/*
+	 * Only generate our index map if it doesn't already exist. Otherwise we will return what we have previously generated. This isn't ideal
+	 * if documents could change while the program is running and this needs to recache the new information.
+	 *
+	 * We will store a map for each document that contains the unique word as a key and that words indices in the text as a value
+	 */
+	public Map < String, Map < String, Set < Integer > > > getDocumentWordIndexMap() throws Exception {
 		if ( documentWordIndexMap == null ) {
 			documentWordIndexMap = new HashMap <>();
 
@@ -76,7 +88,11 @@ public class IndexedSearch extends Search {
 		return documentWordIndexMap;
 	}
 
-	// https://www.kdnuggets.com/2019/04/text-preprocessing-nlp-machine-learning.html
+	/*
+	 * https://www.kdnuggets.com/2019/04/text-preprocessing-nlp-machine-learning.html to read more about preprocessing text.
+	 *
+	 * We will only be lowercasing, stripping special characters, removing stopwords and stemming the suffixes of the text.
+	 */
 	public String preProcess( String text ) {
 		text = lowerCase( text );
 		text = stripSpecialCharacters( text );
@@ -109,7 +125,7 @@ public class IndexedSearch extends Search {
 	}
 
 	/*
-	We will only remove stopwords if it won't leave us with an empty string
+	 * We will only remove stopwords if it won't leave us with an empty string
 	 */
 	public String stopwordRemoval( String text ) {
 		List < String > words = Arrays.asList( text.split( SPLIT_WHITESPACE ) );

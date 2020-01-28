@@ -16,7 +16,7 @@ public class SimpleSearch extends Search {
 			int numberOfMatches = 0;
 			for ( int documentStringIndex = 0; documentStringIndex < documentString.length(); documentStringIndex++ ) {
 				int searchTermIndex = 0;
-				/* Instead of incrementing documentStringIndex we will just be adding searchTermIndex to it to prevent issues like not being able to match on ararachnid to arachnid.  */
+				/* Instead of incrementing documentStringIndex we will just be adding searchTermIndex to it to prevent issues like not being able to match on ararachnid to arachnid. */
 				while ( documentStringIndex + searchTermIndex < documentString.length() && searchTerm.charAt( searchTermIndex ) == documentString.charAt( documentStringIndex + searchTermIndex ) ) {
 					searchTermIndex++;
 

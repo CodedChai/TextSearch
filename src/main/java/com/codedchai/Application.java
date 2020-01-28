@@ -9,11 +9,11 @@ import static java.util.stream.Collectors.toMap;
 public class Application {
 
 	public static void main( String[] args ) {
-		try{
+		try {
 			Application application = new Application();
 
 			application.run();
-		} catch ( Exception e ){
+		} catch ( Exception e ) {
 			e.printStackTrace();
 
 			// Report exception in logging location
@@ -21,6 +21,9 @@ public class Application {
 
 	}
 
+	/*
+	 * This is our main application code. It will prompt for input and handle the input accordingly.
+	 */
 	protected void run() throws Exception {
 
 		try ( Scanner scanner = new Scanner( System.in ) ) {
@@ -30,6 +33,11 @@ public class Application {
 			System.out.println( "Search Method: 1) String Match 2) Regular Expression 3) Indexed" );
 
 			int searchID = scanner.nextInt();
+
+			if ( !getSearchFactories().keySet().contains( searchID ) ) {
+				System.out.println( "Please run again and enter a valid Search Method: 1) String Match 2) Regular Expression 3) Indexed" );
+				return;
+			}
 
 			Search search = instantiateSearch( searchID );
 			search.initialize();
@@ -48,7 +56,7 @@ public class Application {
 		}
 	}
 
-	protected Map<Integer, Supplier<Search>> getSearchFactories(){
+	protected Map < Integer, Supplier < Search > > getSearchFactories() {
 		Map < Integer, Supplier < Search > > searchFactories = new HashMap <>();
 
 		searchFactories.put( 1, SimpleSearch::new );
@@ -58,6 +66,9 @@ public class Application {
 		return searchFactories;
 	}
 
+	/*
+	 * Instantiate the search class depending on the number that was passed in
+	 */
 	protected Search instantiateSearch( int searchID ) {
 		Map < Integer, Supplier < Search > > searchFactories = getSearchFactories();
 
@@ -67,7 +78,9 @@ public class Application {
 		return function.apply( searchID );
 	}
 
-	// https://javarevisited.blogspot.com/2017/09/java-8-sorting-hashmap-by-values-in.html
+	/*
+	 * https://javarevisited.blogspot.com/2017/09/java-8-sorting-hashmap-by-values-in.html for reference on my codes approach. We will sort the ranked results by value and output them as well
+	 */
 	protected void outputRankedResultsInOrder( Map < String, Integer > rankedResults ) {
 		Map < String, Integer > orderedRankedResults = rankedResults.entrySet().stream().sorted( Collections.reverseOrder( Map.Entry.comparingByValue() ) ).collect( toMap( Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e2, LinkedHashMap::new ) );
 

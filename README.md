@@ -2,7 +2,6 @@
 
 Testing different algorithms to search text documents and return results in order based on the frequency of the search term.
 
-
 # The Three Different Algorithms
 
 ## Simple Search
@@ -52,5 +51,7 @@ I ran performance tests on all three algorithms and compiled the results. I foun
 # How to Use
 
 I have committed my entire IntelliJ project so it is super easy to run the code. There are two main classes to be ran. The first would be *Application.java*. This will allow you to do a one time run where you can choose which algorithm to run and what your search term would be. The second is *StressTestApplication.java* which will run the performance benchmark for all of the algorithms. To add any other documents to be searched on they simply need to be added to the resources directory. The only limitation is that documents must have unique names.
+
+Please note that I am using Java 11 features.
 
 ![alt text](https://i.imgur.com/6mu8LFx.png "Program Input Example")

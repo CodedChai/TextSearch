@@ -10,20 +10,26 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public abstract class Search {
+
+	/*
+	 * The cache of the document contents in memory
+	 */
 	protected Map < String, String > documentContentsMap;
 
 	/*
-	 * We will want to return an ordered list of our top results that we searched.
+	 * Return a map of that contains each document and how many matches were found
 	 */
 	public abstract Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception;
 
-
+	/*
+	 * Any setup that needs to be done before running the search function, in this case just loading the documents
+	 */
 	public void initialize() throws Exception {
 		documentContentsMap = loadDocuments();
 	}
 
 	/*
-	 * Load in all searchable files and store them in a Map
+	 * Load in all searchable files and store them in a Map where the filename is the key and the contents are the value
 	 */
 	public Map < String, String > loadDocuments() throws IOException {
 		Map < String, String > documentContentsMap = new HashMap <>();
@@ -37,6 +43,9 @@ public abstract class Search {
 		return documentContentsMap;
 	}
 
+	/*
+	 * Read in the full file line by line then remove any erroneous spaces
+	 */
 	public static String readFile( Path pathToFile ) {
 		StringBuilder fileContents = new StringBuilder();
 
@@ -46,14 +55,14 @@ public abstract class Search {
 			e.printStackTrace();
 		}
 
-		return fileContents.toString();
+		return fileContents.toString().strip();
 	}
 
 	public String getDocumentDirectory() {
 		return "resources";
 	}
 
-	public Map<String, String> getDocumentContentsMap(){
+	public Map < String, String > getDocumentContentsMap() {
 		return documentContentsMap;
 	}
 
