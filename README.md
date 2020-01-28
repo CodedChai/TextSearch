@@ -1,6 +1,6 @@
 # Comparing Text Searching Algorithms
 
-Testing different ways to search text documents and return results in order based on the frequency of the search term.
+Testing different algorithms to search text documents and return results in order based on the frequency of the search term.
 
 # The Three Different Algorithms
 
