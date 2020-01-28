@@ -44,14 +44,20 @@ I used a mixture of unit testing and running specific search words through each 
 
 # Summary
 
-I ran performance tests on all three algorithms and compiled the results. I found that my indexed search is the fastest followed by the regex match and then the brute force approach. On running a search on 2 million valid search terms, my indexed search took about *7 seconds* to complete, the regex match took about *11 seconds* to complete and the brute force search took about *31 seconds* to complete. 
+I ran performance tests on all three algorithms and compiled the results. I found that my indexed search is the fastest followed by the regex match and then the brute force approach. On running a search on 2 million valid search terms, my indexed search took about *7 seconds* to complete, the regex match took about *11 seconds* to complete and the brute force search took about *31 seconds* to complete. This means that my implementation can handle about 285,714 requests/second.
 
 ![alt text](https://i.imgur.com/bdiqOAG.png "Benchmark Results")
+
+These results make sense because the brute force approach takes O(n * m) time where 'n' is the length of the text and 'm' is the length of the search term. Then the regex algorithm is O(n) where 'n' is the length of the of the text. Then the inverted index implementation is O(n) where 'n' is the number of words in the search term. That means for a single word it is technically O(1) since we're just searching a map. The slowest part of this is going to be the text preprocessing we do on the search term.
 
 # How to Use
 
 I have committed my entire IntelliJ project so it is super easy to run the code. There are two main classes to be ran. The first would be *Application.java*. This will allow you to do a one time run where you can choose which algorithm to run and what your search term would be. The second is *StressTestApplication.java* which will run the performance benchmark for all of the algorithms. To add any other documents to be searched on they simply need to be added to the resources directory. The only limitation is that documents must have unique names.
 
-Please note that I am using Java 11 features.
+Please note that I am using Java 11 features, I specifically ran this code using Java 13.
 
 ![alt text](https://i.imgur.com/6mu8LFx.png "Program Input Example")
+
+# Possible Improvements
+
+I have a few ideas in mind for how to improve searching even more in the future. My first thought is to use [Elasticsearch](https://www.elastic.co/) which is massively scalable and used across the industry already. However, if I were to continue with a homegrown implementation I would compare my implementation vs a truly inverted index implementation. I would multithread the search if there were a lot of documents and my algorithm should scale fairly well from more threads. I would also ensure that we could use split the data across different servers if we were dealing with a large dataset. 
