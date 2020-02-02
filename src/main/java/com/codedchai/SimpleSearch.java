@@ -10,6 +10,7 @@ public class SimpleSearch extends Search {
 	 */
 	@Override
 	public Map < String, Integer > getRankedSearchResults( String searchTerm ) throws Exception {
+		searchTerm = StringUtils.preProcess( searchTerm );
 		Map < String, Integer > rankedResults = new HashMap <>();
 		for ( String documentKey : documentContentsMap.keySet() ) {
 			String documentString = documentContentsMap.get( documentKey );

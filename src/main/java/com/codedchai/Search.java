@@ -55,7 +55,7 @@ public abstract class Search {
 			e.printStackTrace();
 		}
 
-		return fileContents.toString().strip();
+		return StringUtils.preProcess( fileContents.toString().strip() );
 	}
 
 	public String getDocumentDirectory() {

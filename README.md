@@ -28,7 +28,7 @@ The documents were indexed using a similar method to an inverted index. A typica
 
 I store the entire index in memory which could cause issues if there is a lot of text to search through. This could easily be fixed by storing the cached index on disk or in a database or better yet by using sharding. 
 
-### Searching the indexed text
+### Searching the Indexed Text
 
 Searching for a phrase is pretty simple with this implementation. I create a set of all of the indices of the nth word and then I create a set of all of the indices for the nth + 1 word. I then loop through all of the nth word indices to see if their index + 1 exists in the nth + 1 indices set. If the index exists there then I keep track of that one as well and repeat this process with the nth + 1 word becoming the nth word. Then however many numbers are in the indices set by the end is how many full matches we had and is used to determine the rank of the documents. 
 
